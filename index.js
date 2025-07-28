@@ -1,9 +1,9 @@
-
 // Reset body styles
 document.body.style.margin = '0';
 document.body.style.fontFamily = 'sans-serif';
 document.body.style.backgroundColor = '#f1f1f1';
 document.body.style.height = '100vh';
+document.body.style.width = '100vw';
 
 // === TOGGLE BUTTON === //
 const toggleBtn = document.createElement('button');
@@ -13,8 +13,7 @@ toggleBtn.style.right = '20px';
 toggleBtn.style.width = '60px';
 toggleBtn.style.height = '60px';
 toggleBtn.style.borderRadius = '50%';
-toggleBtn.style.backgroundColor = '#41D3E1';
-// toggleBtn.style.border = '4px solid blue';
+toggleBtn.style.backgroundColor = '#015F63';
 toggleBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
 toggleBtn.style.cursor = 'pointer';
 toggleBtn.style.zIndex = '1000';
@@ -22,240 +21,341 @@ toggleBtn.style.display = 'flex';
 toggleBtn.style.alignItems = 'center';
 toggleBtn.style.justifyContent = 'center';
 
-// Icon inside the button
 const icon = document.createElement('span');
-icon.textContent = '💬'; // Replace with image if preferred
+icon.textContent = '💬';
 icon.style.fontSize = '24px';
 icon.style.color = 'white';
 toggleBtn.appendChild(icon);
 document.body.appendChild(toggleBtn);
 
-// === CHATBOT CONTAINER === //
+// === CONTAINER === //
 const container = document.createElement('div');
-container.style.width = '360px';
-container.style.height = '360px';
-container.style.borderRadius = '20px';
+container.style.width = '430px';
+container.style.height = '600px';
+container.style.borderRadius = '16px';
 container.style.overflow = 'hidden';
-container.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+container.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
 container.style.display = 'flex';
 container.style.flexDirection = 'column';
-container.style.backgroundColor = 'white';
+container.style.backgroundColor = '#1C1C1E';
 container.style.position = 'fixed';
-container.style.top = '67%';
-container.style.left = '87%';
-// container.style.Bottom = '400px';
-// container.style.right = '2px';
-container.style.transform = 'translate(-50%, -50%)';
+container.style.bottom = '90px';
+container.style.right = '30px';
 container.style.zIndex = '1000';
-container.style.display = 'none'; // Hidden by default
+container.style.display = 'none';
 document.body.appendChild(container);
+
+// === PAGES === //
+// Chat Page
+const chatPage = document.createElement('div');
+chatPage.style.display = 'flex';
+chatPage.style.flexDirection = 'column';
+chatPage.style.height = '100%';
+
+// Email Page
+const emailPage = document.createElement('div');
+emailPage.style.display = 'none';
+emailPage.style.flexDirection = 'column';
+emailPage.style.height = '100%';
+emailPage.style.padding = '16px';
+emailPage.style.color = 'white';
+emailPage.innerHTML = `
+  <h3 style="margin-top: 0;">Contact us via Email</h3>
+  <div style="margin-bottom: 12px;">
+    <label style="display: block; margin-bottom: 4px; font-size: 14px;">Your Email</label>
+    <input type="email" style="width: 100%; padding: 8px 0; border-radius: 4px; border: none; background: #2C2C2E; color: white;">
+  </div>
+  <div style="margin-bottom: 12px;">
+    <label style="display: block; margin-bottom: 4px; font-size: 14px;">Message</label>
+    <textarea style="width: 100%; height: 120px; padding: 8px 0; border-radius: 4px; border: none; background: #2C2C2E; color: white;"></textarea>
+  </div>
+  <button style="background: #015F63; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer;">Send Email</button>
+`;
+
+// WhatsApp Page
+const whatsappPage = document.createElement('div');
+whatsappPage.style.display = 'none';
+whatsappPage.style.flexDirection = 'column';
+whatsappPage.style.height = '100%';
+whatsappPage.style.padding = '16px';
+whatsappPage.style.color = 'white';
+whatsappPage.style.textAlign = 'center';
+whatsappPage.innerHTML = `
+  <div style="margin-top: 40px; margin-bottom: 20px;">
+    <span style="font-size: 48px;">💬</span>
+  </div>
+  <h3 style="margin-bottom: 8px;">Chat with us on WhatsApp</h3>
+  <p style="font-size: 14px; color: #aaa; margin-bottom: 24px;">We'll connect you directly to our support team</p>
+  <button style="background: #25D366; color: white; border: none; padding: 12px 24px; border-radius: 24px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+    <span style="font-size: 20px; margin-right: 8px;">📱</span> Open WhatsApp
+  </button>
+`;
 
 // === HEADER === //
 const header = document.createElement('div');
-header.style.backgroundColor = '#3AB8BD';
+header.style.backgroundColor = '#015F63';
 header.style.color = 'white';
-header.style.padding = '10px 15px';
+header.style.padding = '16px 16px';
 header.style.display = 'flex';
-header.style.alignItems = 'center';
+header.style.animation =
+header.style.flexDirection = 'column';
+header.style.gap = '6px';
 
-const logo = document.createElement('div');
-logo.textContent = 'Devsinn\nTechnologies';
-logo.style.backgroundColor = 'white';
-logo.style.color = 'black';
-logo.style.fontWeight = 'bold';
-logo.style.fontSize = '8px';
-logo.style.padding = '4px 6px';
-logo.style.lineHeight = '8px';
+const titleRow = document.createElement('div');
+titleRow.style.display = 'flex';
+titleRow.style.alignItems = 'center';
+
+const logo = document.createElement('img');
+logo.src = '/logo.jpeg';
+logo.style.width = '40px';
+logo.style.height = '40px';
+logo.style.borderRadius = '50%';
+logo.style.objectFit = 'cover';
 logo.style.marginRight = '10px';
-logo.style.borderRadius = '3px';
-header.appendChild(logo);
+titleRow.appendChild(logo);
 
-const title = document.createElement('span');
-title.textContent = 'Chatbot';
-title.style.fontSize = '20px';
+// New container for title and status
+const titleStatusWrapper = document.createElement('div');
+titleStatusWrapper.style.display = 'grid';
+titleStatusWrapper.style.gridTemplateColumns = '1fr';
+titleStatusWrapper.style.flexDirection = 'row';
+titleStatusWrapper.style.alignItems = 'center';
+titleStatusWrapper.style.gap = '8px'; // spacing between title and status
+
+const title = document.createElement('div');
+title.textContent = 'DevsInn Technologies';
 title.style.fontWeight = 'bold';
-header.appendChild(title);
+title.style.fontSize = '16px';
 
-container.appendChild(header);
+const status = document.createElement('div');
+status.innerHTML = '<span style="display:inline-block;width:10px;height:10px;background:#0f0;border-radius:50%;margin-right:4px;"></span>Online';
+status.style.fontSize = '12px';
+status.style.color = '#e0e0e0';
+
+titleStatusWrapper.appendChild(title);
+titleStatusWrapper.appendChild(status);
+
+titleRow.appendChild(titleStatusWrapper);
+header.appendChild(titleRow);
+chatPage.appendChild(header);
 
 // === CHAT BODY === //
 const chatBody = document.createElement('div');
-chatBody.style.backgroundColor = 'black';
 chatBody.style.flex = '1';
-chatBody.style.padding = '10px';
+chatBody.style.backgroundColor = '#121212';
+chatBody.style.padding = '16px';
 chatBody.style.overflowY = 'auto';
 chatBody.style.display = 'flex';
 chatBody.style.flexDirection = 'column';
-container.appendChild(chatBody);
 
-
-// Initial chatbot message
+// Initial bot message
 const message = document.createElement('div');
-message.textContent = 'Hello! How can I help you today?';
-message.style.backgroundColor = '#333';
+message.textContent = "Hey! 😊 I'm here to chat about how AI can help your business grow. What's on your mind?";
+message.style.backgroundColor = '#2C2C2E';
 message.style.color = 'white';
 message.style.padding = '12px 16px';
 message.style.borderRadius = '20px';
-message.style.maxWidth = '70%';
+message.style.maxWidth = '80%';
 message.style.alignSelf = 'flex-start';
 message.style.margin = '10px 0';
-message.style.fontSize = '16px';
+message.style.fontSize = '14px';
 chatBody.appendChild(message);
+
+chatPage.appendChild(chatBody);
 
 // === INPUT AREA === //
 const inputArea = document.createElement('div');
 inputArea.style.display = 'flex';
 inputArea.style.alignItems = 'center';
-inputArea.style.gap = '5px';
-inputArea.style.backgroundColor = 'white';
-inputArea.style.borderTop = '1px solid #ddd';
-inputArea.style.borderBottomLeftRadius = '20px';
-inputArea.style.borderBottomRightRadius = '20px';
 inputArea.style.padding = '10px';
+inputArea.style.borderTop = '1px solid #333';
+inputArea.style.background = '#1C1C1E';
+inputArea.style.gap = '8px';
 
-// Attachment
-const fileBtn = document.createElement('button');
-fileBtn.textContent = '📎';
-fileBtn.style.background = 'none';
-fileBtn.style.border = 'none';
-fileBtn.style.fontSize = '20px';
-fileBtn.style.cursor = 'pointer';
-inputArea.appendChild(fileBtn);
+const inputWrapper = document.createElement('div');
+inputWrapper.style.display = 'flex';
+inputWrapper.style.flex = '1';
+inputWrapper.style.alignItems = 'center';
+inputWrapper.style.background = '#2C2C2E';
+inputWrapper.style.borderRadius = '20px';
+inputWrapper.style.padding = '6px 12px';
 
-// Microphone
-const micBtn = document.createElement('button');
-micBtn.textContent = '🎤';
-micBtn.style.background = 'none';
-micBtn.style.border = 'none';
-micBtn.style.fontSize = '20px';
-micBtn.style.cursor = 'pointer';
-inputArea.appendChild(micBtn);
-
-// Input box
 const inputBox = document.createElement('input');
 inputBox.type = 'text';
-inputBox.placeholder = 'Type a message...';
+inputBox.placeholder = 'Type your Message';
 inputBox.style.flex = '1';
-inputBox.style.padding = '10px 16px';
-inputBox.style.borderRadius = '16px';
+inputBox.style.background = 'transparent';
 inputBox.style.border = 'none';
-inputBox.style.backgroundColor = '#eee';
-inputBox.style.fontSize = '16px';
+inputBox.style.color = 'white';
+inputBox.style.fontSize = '14px';
 inputBox.style.outline = 'none';
-inputArea.appendChild(inputBox);
 
-// Send button
+const micIcon = document.createElement('span');
+micIcon.textContent = '🎤';
+micIcon.style.cursor = 'pointer';
+micIcon.style.marginLeft = '8px';
+micIcon.style.fontSize = '18px';
+
+inputWrapper.appendChild(inputBox);
+inputWrapper.appendChild(micIcon);
+inputArea.appendChild(inputWrapper);
+
+// Send Button
 const sendBtn = document.createElement('button');
-sendBtn.textContent = 'Send';
-sendBtn.style.backgroundColor = '#3AB8BD';
-sendBtn.style.color = 'white';
+sendBtn.innerHTML = '<img src="/send.png" alt="Send" style="width: 20px; height: 20px;">';
+sendBtn.style.backgroundColor = '#015F63';
 sendBtn.style.border = 'none';
-sendBtn.style.padding = '10px 16px';
 sendBtn.style.borderRadius = '12px';
-sendBtn.style.fontWeight = 'bold';
+sendBtn.style.padding = '10px';
 sendBtn.style.cursor = 'pointer';
+sendBtn.style.color = 'white';
+sendBtn.style.fontSize = '16px';
 inputArea.appendChild(sendBtn);
 
-container.appendChild(inputArea);
+chatPage.appendChild(inputArea);
 
-// === FOOTER === //
+// Add pages to container
+container.appendChild(chatPage);
+container.appendChild(emailPage);
+container.appendChild(whatsappPage);
+
+// === FOOTER TABS === //
 const footer = document.createElement('div');
-footer.style.padding = '10px';
-footer.style.fontSize = '12px';
-footer.style.color = 'gray';
-footer.style.textAlign = 'center';
+footer.style.display = 'flex';
+footer.style.justifyContent = 'space-around';
+footer.style.padding = '10px 0';
+footer.style.background = '#111'; // Slightly lighter black
+footer.style.borderTop = '1px solid #333';
 
-const footerText = document.createElement('em');
-footerText.innerHTML = 'Created by <span style="color:#3AB8BD;font-style:italic;">Devsinn Technologies</span>';
-footer.appendChild(footerText);
-container.appendChild(footer);
+const tabs = [
+  { icon: '🤖', label: 'Chatbot', page: 'chat' },
+  { icon: '📨', label: 'Email', page: 'email' },
+  { icon: '📱', label: 'WhatsApp', page: 'whatsapp' }
+];
 
-// === MESSAGE HANDLING === //
-function sendMessage() {
-  const newMsg = document.createElement('div');
-  newMsg.textContent = inputBox.value;
-  newMsg.style.backgroundColor = '#333';
-  newMsg.style.color = 'white';
-  newMsg.style.padding = '12px 16px';
-  newMsg.style.borderRadius = '20px';
-  newMsg.style.maxWidth = '70%';
-  newMsg.style.alignSelf = 'flex-end';
-  newMsg.style.margin = '10px 0';
-  newMsg.style.fontSize = '16px';
-  chatBody.appendChild(newMsg);
-  inputBox.value = '';
-  chatBody.scrollTop = chatBody.scrollHeight;
-   // === AJAX: Send message to API ===
- const xhr = new XMLHttpRequest();
- xhr.open('POST', '/api/chat/send', true);
- xhr.setRequestHeader('Content-Type', 'application/json');
- xhr.onreadystatechange = function () {
-   if (xhr.readyState === 4 && xhr.status === 200) {
-     const response = JSON.parse(xhr.responseText);
-     if (response.reply) {
-       appendBotMessage(response.reply);
-     }
-   }
- };
- xhr.send(JSON.stringify({ message: messageText }));
+tabs.forEach(tab => {
+  const tabEl = document.createElement('div');
+  tabEl.style.display = 'flex';
+  tabEl.style.flexDirection = 'column';
+  tabEl.style.alignItems = 'center';
+  tabEl.style.justifyContent = 'center';
+  tabEl.style.color = '#bbb';
+  tabEl.style.fontSize = '12px';
+  tabEl.style.cursor = 'pointer';
+  tabEl.style.padding = '6px 12px';
+  tabEl.style.transition = 'all 0.3s ease';
+  tabEl.style.borderTop = '2px solid transparent';
+  tabEl.style.flex = '1';
+  tabEl.style.fontFamily = 'sans-serif';
+  tabEl.style.borderRadius = '8px 8px 0 0';
+
+  const icon = document.createElement('span');
+  icon.textContent = tab.icon;
+  icon.style.fontSize = '20px';
+  icon.style.marginBottom = '4px';
+
+  const label = document.createElement('span');
+  label.textContent = tab.label;
+  label.style.fontWeight = '600';
+
+  tabEl.appendChild(icon);
+  tabEl.appendChild(label);
+
+  tabEl.addEventListener('click', () => {
+    // Hide all pages
+    chatPage.style.display = 'none';
+    emailPage.style.display = 'none';
+    whatsappPage.style.display = 'none';
+
+    // Show selected page 
+    if (tab.page === 'chat') chatPage.style.display = 'flex';
+    if (tab.page === 'email') emailPage.style.display = 'flex';
+    if (tab.page === 'whatsapp') whatsappPage.style.display = 'flex';
+
+    // Update active tab styling
+    document.querySelectorAll('.footer-tab').forEach(t => {
+      t.style.color = '#bbb';
+      t.style.borderTop = '2px solid transparent';
+      t.style.fontWeight = 'normal';
+      t.style.backgroundColor = 'transparent';
+    });
+
+    tabEl.style.color = '#01B4B8';
+    tabEl.style.fontWeight = 'bold';
+    tabEl.style.borderTop = '2px solid #01B4B8';
+    tabEl.style.backgroundColor = '#1a1a1a';
+  });
+
+  tabEl.classList.add('footer-tab');
+  footer.appendChild(tabEl);
+});
+
+// Set first tab as active by default
+if (footer.firstChild) {
+  footer.firstChild.style.color = '#01B4B8';
+  footer.firstChild.style.fontWeight = 'bold';
+  footer.firstChild.style.borderTop = '2px solid #01B4B8';
+  footer.firstChild.style.backgroundColor = '#1a1a1a';
 }
 
-// === HELPER: Append Bot Message === //
-function appendBotMessage(text) {
-    const botMsg = document.createElement('div');
-    botMsg.textContent = text;
-    botMsg.style.backgroundColor = '#666';
-    botMsg.style.color = 'white';
-    botMsg.style.padding = '12px 16px';
-    botMsg.style.borderRadius = '20px';
-    botMsg.style.maxWidth = '70%';
-    botMsg.style.alignSelf = 'flex-start';
-    botMsg.style.margin = '10px 0';
-    botMsg.style.fontSize = '16px';
-    chatBody.appendChild(botMsg);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
+container.appendChild(footer);
 
-  // === AJAX: Fetch Chat History on Open === //
-function fetchChatHistory() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/chat/history', true);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const messages = JSON.parse(xhr.responseText);
-        messages.forEach(msg => {
-          const div = document.createElement('div');
-          div.textContent = msg.text;
-          div.style.backgroundColor = msg.sender === 'bot' ? '#666' : '#333';
-          div.style.color = 'white';
-          div.style.padding = '12px 16px';
-          div.style.borderRadius = '20px';
-          div.style.maxWidth = '70%';
-          div.style.alignSelf = msg.sender === 'bot' ? 'flex-start' : 'flex-end';
-          div.style.margin = '10px 0';
-          div.style.fontSize = '16px';
-          chatBody.appendChild(div);
-        });
-        chatBody.scrollTop = chatBody.scrollHeight;
-      }
-    };
-    xhr.send();
-  }
-  
+
+// === POWERED BY === //
+const powered = document.createElement('div');
+powered.innerHTML = 'Powered by : <strong>Devsinn Technologies</strong>';
+powered.style.fontSize = '10px';
+powered.style.color = '#015F63';
+powered.style.background = '#ffffffff';
+powered.style.textAlign = 'center';
+powered.style.padding = '4px 0';
+container.appendChild(powered);
+
+// === FUNCTIONALITY === //
+function sendMessage() {
+  const text = inputBox.value.trim();
+  if (!text) return;
+
+  const userMsg = document.createElement('div');
+  userMsg.textContent = text;
+  userMsg.style.backgroundColor = '#4CAF50';
+  userMsg.style.color = 'white';
+  userMsg.style.padding = '12px 16px';
+  userMsg.style.borderRadius = '20px';
+  userMsg.style.maxWidth = '70%';
+  userMsg.style.alignSelf = 'flex-end';
+  userMsg.style.margin = '10px 0';
+  userMsg.style.fontSize = '14px';
+  chatBody.appendChild(userMsg);
+
+  inputBox.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  // Simulate bot reply
+  setTimeout(() => appendBotMessage("Thanks! We'll get back to you shortly."), 1000);
+}
+
+function appendBotMessage(text) {
+  const botMsg = document.createElement('div');
+  botMsg.textContent = text;
+  botMsg.style.backgroundColor = '#2C2C2E';
+  botMsg.style.color = 'white';
+  botMsg.style.padding = '12px 16px';
+  botMsg.style.borderRadius = '20px';
+  botMsg.style.maxWidth = '70%';
+  botMsg.style.alignSelf = 'flex-start';
+  botMsg.style.margin = '10px 0';
+  botMsg.style.fontSize = '14px';
+  chatBody.appendChild(botMsg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
 
 inputBox.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter' && inputBox.value.trim()) {
-    sendMessage();
-  }
+  if (e.key === 'Enter') sendMessage();
 });
 
-sendBtn.addEventListener('click', () => {
-  if (inputBox.value.trim()) {
-    sendMessage();
-  }
-});
+sendBtn.addEventListener('click', sendMessage);
 
-// === TOGGLE BUTTON FUNCTION === //
 toggleBtn.addEventListener('click', () => {
   container.style.display = container.style.display === 'none' ? 'flex' : 'none';
 });
