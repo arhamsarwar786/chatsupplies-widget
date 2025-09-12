@@ -1,3 +1,13 @@
+const scriptTag = document.getElementById("chatbot");
+
+// Read the data attributes
+const adminId = scriptTag.getAttribute("data-admin-id");
+const token = scriptTag.getAttribute("api-key");
+
+
+let userBubbleColor;
+
+
 // Reset body styles
 document.body.style.margin = '0';
 document.body.style.fontFamily = 'sans-serif';
@@ -37,7 +47,7 @@ container.style.overflow = 'hidden';
 container.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
 container.style.display = 'flex';
 container.style.flexDirection = 'column';
-container.style.backgroundColor = '#1C1C1E';
+container.style.backgroundColor = 'colorScheme.botTextColor';
 container.style.position = 'fixed';
 container.style.bottom = '90px';
 container.style.right = '30px';
@@ -48,6 +58,7 @@ document.body.appendChild(container);
 // === PAGES === //
 // Chat Page
 const chatPage = document.createElement('div');
+chatPage.id = 'chatPage';
 chatPage.style.display = 'flex';
 chatPage.style.flexDirection = 'column';
 chatPage.style.height = '100%';
@@ -93,7 +104,7 @@ whatsappPage.innerHTML = `
 
 // === HEADER === //
 const header = document.createElement('div');
-header.style.backgroundColor = '#015F63';
+header.id = "header";
 header.style.color = 'white';
 header.style.padding = '16px 16px';
 header.style.display = 'flex';
@@ -123,7 +134,8 @@ titleStatusWrapper.style.alignItems = 'center';
 titleStatusWrapper.style.gap = '8px'; // spacing between title and status
 
 const title = document.createElement('div');
-title.textContent = 'DevsInn Technologies';
+title.id = 'chatTitle';
+// title.textContent = 'DevsInn Technologies';
 title.style.fontWeight = 'bold';
 title.style.fontSize = '16px';
 
@@ -141,8 +153,8 @@ chatPage.appendChild(header);
 
 // === CHAT BODY === //
 const chatBody = document.createElement('div');
+chatBody.id = 'chatBody';
 chatBody.style.flex = '1';
-chatBody.style.backgroundColor = '#121212';
 chatBody.style.padding = '16px';
 chatBody.style.overflowY = 'auto';
 chatBody.style.display = 'flex';
@@ -150,8 +162,8 @@ chatBody.style.flexDirection = 'column';
 
 // Initial bot message
 const message = document.createElement('div');
+message.className = 'botMsg';
 message.textContent = "Hey! 😊 I'm here to chat about how AI can help your business grow. What's on your mind?";
-message.style.backgroundColor = '#2C2C2E';
 message.style.color = 'white';
 message.style.padding = '12px 16px';
 message.style.borderRadius = '20px';
@@ -162,7 +174,6 @@ message.style.fontSize = '14px';
 chatBody.appendChild(message);
 
 chatPage.appendChild(chatBody);
-
 // === INPUT AREA === //
 const inputArea = document.createElement('div');
 inputArea.style.display = 'flex';
@@ -202,8 +213,8 @@ inputArea.appendChild(inputWrapper);
 
 // Send Button
 const sendBtn = document.createElement('button');
+sendBtn.id = 'sendBtn';
 sendBtn.innerHTML = '<img src="/send.png" alt="Send" style="width: 20px; height: 20px;">';
-sendBtn.style.backgroundColor = '#015F63';
 sendBtn.style.border = 'none';
 sendBtn.style.borderRadius = '12px';
 sendBtn.style.padding = '10px';
@@ -283,7 +294,7 @@ tabs.forEach(tab => {
     tabEl.style.color = '#01B4B8';
     tabEl.style.fontWeight = 'bold';
     tabEl.style.borderTop = '2px solid #01B4B8';
-    tabEl.style.backgroundColor = '#1a1a1a';
+    tabEl.style.backgroundColor = backgroundColor;
   });
 
   tabEl.classList.add('footer-tab');
@@ -311,14 +322,16 @@ powered.style.textAlign = 'center';
 powered.style.padding = '4px 0';
 container.appendChild(powered);
 
+
 // === FUNCTIONALITY === //
 function sendMessage() {
-  const text = inputBox.value.trim();
+   const text = inputBox.value.trim();
   if (!text) return;
-
-  const userMsg = document.createElement('div');
+  
+    const userMsg = document.createElement('div');
+    userMsg.className = 'userMsgBubble';
   userMsg.textContent = text;
-  userMsg.style.backgroundColor = '#4CAF50';
+  userMsg.style.backgroundColor = userBubbleColor;
   userMsg.style.color = 'white';
   userMsg.style.padding = '12px 16px';
   userMsg.style.borderRadius = '20px';
@@ -330,15 +343,43 @@ function sendMessage() {
 
   inputBox.value = '';
   chatBody.scrollTop = chatBody.scrollHeight;
-
-  // Simulate bot reply
-  setTimeout(() => appendBotMessage("Thanks! We'll get back to you shortly."), 1000);
+const headers = {
+  "accept": "application/json",
+  "Content-Type": "application/json",
+  "x-api-key": token,
+};
+  
+  // Send to API
+  fetch("https://api.chatsupplies.com/chat/message", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      message: text,
+      chatbot_id: adminId,
+      session_id: "string" // or your actual session id
+    })
+  })
+    .then(res => {
+      console.log(res)
+      if (!res.ok) throw new Error("Request failed: " + res.status);
+      return res.json();
+    })
+ .then(data => {
+  if (data.response) {
+    appendBotMessage(data.response);
+  } else {
+    appendBotMessage("Sorry, I didn't get a response.");
+  }
+})
+.catch(err => {
+  console.error("Fetch error:", err);
+  appendBotMessage("Sorry, there was an error. Please try again.");
+});
 }
-
 function appendBotMessage(text) {
   const botMsg = document.createElement('div');
+  botMsg.className = 'botMsg';
   botMsg.textContent = text;
-  botMsg.style.backgroundColor = '#2C2C2E';
   botMsg.style.color = 'white';
   botMsg.style.padding = '12px 16px';
   botMsg.style.borderRadius = '20px';
@@ -349,12 +390,77 @@ function appendBotMessage(text) {
   chatBody.appendChild(botMsg);
   chatBody.scrollTop = chatBody.scrollHeight;
 }
-
+function fetchChatHistory() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/api/chat/history', true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const messages = JSON.parse(xhr.responseText);
+        messages.forEach(msg => {
+          const div = document.createElement('div');
+          div.textContent = msg.text;
+          // div.style.backgroundColor = msg.sender === 'bot' ? '#666' : '#333';
+          div.style.color = 'white';
+          div.style.padding = '12px 16px';
+          div.style.borderRadius = '20px';
+          div.style.maxWidth = '70%';
+          div.style.alignSelf = msg.sender === 'bot' ? 'flex-start' : 'flex-end';
+          div.style.margin = '10px 0';
+          div.style.fontSize = '16px';
+          chatBody.appendChild(div);
+        });
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    };
+    xhr.send();
+  }
 inputBox.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') sendMessage();
 });
 
-sendBtn.addEventListener('click', sendMessage);
+
+function fetchChatbotConfig(token, adminId) {
+  const url = `https://api.chatsupplies.com/chatbots/getChatbotConfig?api_key=${token}&chatbot_id=${adminId}`;
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json'
+    },
+    body: '' // empty body as in the curl
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+    return res.json();
+  })
+  .then(data => {
+    console.log("Chatbot config fetched successfully:", data);
+  
+
+    let colorScheme = JSON.parse(data[0].color_scheme);
+    document.getElementById("header").style.backgroundColor = colorScheme.primary || '#a5a5a5ff';
+    document.getElementById("sendBtn").style.backgroundColor = colorScheme.primary || '#a5a5a5ff';
+    document.querySelector(".botMsg").style.backgroundColor = data[0].bot_bubble_color || '#df0808ff';
+    document.getElementById("chatTitle").textContent = data[0].name || 'Chatbot';
+    userBubbleColor = data[0].user_bubble_color || '#15bfbfff'
+    // document.querySelector(".userMsgBubble").style.backgroundColor = ;
+    document.getElementById("chatBody").style.backgroundColor = data[0].window_background_color || '#000000ff';
+    // You can update the UI or use this data however you like
+  })
+  .catch(err => {
+    console.error("Failed to fetch chatbot config:", err);
+  });
+}
+fetchChatbotConfig(token, adminId);
+
+
+
+// sendBtn.addEventListener('click', sendMessage);
+sendBtn.addEventListener('click', () => {
+  if (inputBox.value.trim()) {
+    sendMessage();
+  }
+});
 
 toggleBtn.addEventListener('click', () => {
   container.style.display = container.style.display === 'none' ? 'flex' : 'none';
