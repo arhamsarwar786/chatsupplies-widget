@@ -41,13 +41,13 @@ document.body.appendChild(toggleBtn);
 // === CONTAINER === //
 const container = document.createElement('div');
 container.style.width = '430px';
-container.style.height = '600px';
+container.style.height = '450px'; 
 container.style.borderRadius = '16px';
 container.style.overflow = 'hidden';
 container.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
 container.style.display = 'flex';
 container.style.flexDirection = 'column';
-container.style.backgroundColor = 'colorScheme.botTextColor';
+container.style.backgroundColor = '#fff'; // fallback
 container.style.position = 'fixed';
 container.style.bottom = '90px';
 container.style.right = '30px';
@@ -61,24 +61,25 @@ const chatPage = document.createElement('div');
 chatPage.id = 'chatPage';
 chatPage.style.display = 'flex';
 chatPage.style.flexDirection = 'column';
-chatPage.style.height = '100%';
+chatPage.style.flex = '1';
+chatPage.style.height = '385px';
 
 // Email Page
 const emailPage = document.createElement('div');
 emailPage.style.display = 'none';
 emailPage.style.flexDirection = 'column';
-emailPage.style.height = '100%';
+emailPage.style.height = '385px';
 emailPage.style.padding = '16px';
 emailPage.style.color = 'white';
 emailPage.innerHTML = `
-  <h3 style="margin-top: 0;">Contact us via Email</h3>
+  <h3 style="margin-top: 0; color: #146e20ff;">Contact us via Email</h3>
   <div style="margin-bottom: 12px;">
-    <label style="display: block; margin-bottom: 4px; font-size: 14px;">Your Email</label>
-    <input type="email" style="width: 100%; padding: 8px 0; border-radius: 4px; border: none; background: #2C2C2E; color: white;">
+    <label style="display: block; margin-bottom: 4px; color: #146e20ff; font-size: 14px;">Your Email</label>
+    <input type="email" style="width: 100%; padding: 8px 0; border-radius: 4px; border: none; background: #d2d2d8ff; color: white;">
   </div>
   <div style="margin-bottom: 12px;">
-    <label style="display: block; margin-bottom: 4px; font-size: 14px;">Message</label>
-    <textarea style="width: 100%; height: 120px; padding: 8px 0; border-radius: 4px; border: none; background: #2C2C2E; color: white;"></textarea>
+    <label style="display: block; color: #146e20ff; margin-bottom: 4px; font-size: 14px;">Message</label>
+    <textarea style="width: 100%; height: 120px; padding: 8px 0; border-radius: 4px; border: none; background: #d2d2d8ff; color: white;"></textarea>
   </div>
   <button style="background: #015F63; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer;">Send Email</button>
 `;
@@ -87,7 +88,7 @@ emailPage.innerHTML = `
 const whatsappPage = document.createElement('div');
 whatsappPage.style.display = 'none';
 whatsappPage.style.flexDirection = 'column';
-whatsappPage.style.height = '100%';
+whatsappPage.style.height = '385px';
 whatsappPage.style.padding = '16px';
 whatsappPage.style.color = 'white';
 whatsappPage.style.textAlign = 'center';
@@ -108,7 +109,7 @@ header.id = "header";
 header.style.color = 'white';
 header.style.padding = '16px 16px';
 header.style.display = 'flex';
-header.style.animation =
+header.style.height = '40px';
 header.style.flexDirection = 'column';
 header.style.gap = '6px';
 
@@ -117,7 +118,8 @@ titleRow.style.display = 'flex';
 titleRow.style.alignItems = 'center';
 
 const logo = document.createElement('img');
-logo.src = '/logo.jpeg';
+logo.id = 'logo';
+// logo.src = '/logo.jpeg';
 logo.style.width = '40px';
 logo.style.height = '40px';
 logo.style.borderRadius = '50%';
@@ -155,25 +157,28 @@ chatPage.appendChild(header);
 const chatBody = document.createElement('div');
 chatBody.id = 'chatBody';
 chatBody.style.flex = '1';
+chatBody.style.height = '320px';
 chatBody.style.padding = '16px';
-chatBody.style.overflowY = 'auto';
+chatBody.style.overflowY = 'auto';      // scrolls when content exceeds
 chatBody.style.display = 'flex';
 chatBody.style.flexDirection = 'column';
 
 // Initial bot message
-const message = document.createElement('div');
-message.className = 'botMsg';
-message.textContent = "Hey! 😊 I'm here to chat about how AI can help your business grow. What's on your mind?";
-message.style.color = 'white';
-message.style.padding = '12px 16px';
-message.style.borderRadius = '20px';
-message.style.maxWidth = '80%';
-message.style.alignSelf = 'flex-start';
-message.style.margin = '10px 0';
-message.style.fontSize = '14px';
-chatBody.appendChild(message);
+// function appendBotMessage(text) {
+const botBubbleMsg = document.createElement('div');
+botBubbleMsg.id = 'botBubbleMsg';
+botBubbleMsg.textContent = "Hey! 😊 I'm here to chat about how AI can help your business grow. What's on your mind?";
+botBubbleMsg.style.padding = '12px 16px';
+botBubbleMsg.style.color = 'white';
+botBubbleMsg.style.borderRadius = '20px';
+botBubbleMsg.style.maxWidth = '80%';
+botBubbleMsg.style.alignSelf = 'flex-start';
+botBubbleMsg.style.margin = '10px 0';
+botBubbleMsg.style.fontSize = '14px';
+chatBody.appendChild(botBubbleMsg);
 
 chatPage.appendChild(chatBody);
+// }
 // === INPUT AREA === //
 const inputArea = document.createElement('div');
 inputArea.style.display = 'flex';
@@ -234,6 +239,7 @@ container.appendChild(whatsappPage);
 const footer = document.createElement('div');
 footer.style.display = 'flex';
 footer.style.justifyContent = 'space-around';
+footer.style.height = '50px';
 footer.style.padding = '10px 0';
 footer.style.background = '#111'; // Slightly lighter black
 footer.style.borderTop = '1px solid #333';
@@ -314,71 +320,99 @@ container.appendChild(footer);
 
 // === POWERED BY === //
 const powered = document.createElement('div');
-powered.innerHTML = 'Powered by : <strong>Devsinn Technologies</strong>';
+powered.innerHTML = 'Powered by : <strong>Chat Supplies</strong>';
 powered.style.fontSize = '10px';
+powered.style.height = '15px';
 powered.style.color = '#015F63';
 powered.style.background = '#ffffffff';
 powered.style.textAlign = 'center';
 powered.style.padding = '4px 0';
 container.appendChild(powered);
 
+function showTypingIndicator() {
+  const typingBubble = document.createElement('div');
+  typingBubble.className = 'typing-indicator';
+  typingBubble.style.backgroundColor = window.bot_bubble_color || '#015F63';
+  typingBubble.style.color = 'white';
+  typingBubble.style.padding = '12px 16px';
+  typingBubble.style.borderRadius = '20px';
+  typingBubble.style.maxWidth = '70%';
+  typingBubble.style.alignSelf = 'flex-start';
+  typingBubble.style.margin = '10px 0';
+  typingBubble.style.fontSize = '14px';
+  typingBubble.style.fontStyle = 'italic';
+  typingBubble.textContent = 'Typing...';
+  chatBody.appendChild(typingBubble);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  return typingBubble;
+}
+
 
 // === FUNCTIONALITY === //
 function sendMessage() {
-   const text = inputBox.value.trim();
+  const text = inputBox.value.trim();
   if (!text) return;
-  
-    const userMsg = document.createElement('div');
-    userMsg.className = 'userMsgBubble';
-  userMsg.textContent = text;
-  userMsg.style.backgroundColor = userBubbleColor;
-  userMsg.style.color = 'white';
-  userMsg.style.padding = '12px 16px';
-  userMsg.style.borderRadius = '20px';
-  userMsg.style.maxWidth = '70%';
-  userMsg.style.alignSelf = 'flex-end';
-  userMsg.style.margin = '10px 0';
-  userMsg.style.fontSize = '14px';
-  chatBody.appendChild(userMsg);
+ 
+  // User bubble
+  const userMsgBubble = document.createElement('div');
+  userMsgBubble.className = 'userMsgBubble';
+  userMsgBubble.textContent = text;
+  userMsgBubble.style.backgroundColor = window.user_bubble_color || '#e2e8f0';
+  userMsgBubble.style.color = 'white';
+  userMsgBubble.style.padding = '12px 16px';
+  userMsgBubble.style.borderRadius = '20px';
+  userMsgBubble.style.maxWidth = '70%';
+  userMsgBubble.style.alignSelf = 'flex-end';
+  userMsgBubble.style.margin = '5px 0';
+  userMsgBubble.style.fontSize = '14px';
+  chatBody.appendChild(userMsgBubble);
 
   inputBox.value = '';
   chatBody.scrollTop = chatBody.scrollHeight;
-const headers = {
-  "accept": "application/json",
-  "Content-Type": "application/json",
-  "x-api-key": token,
-};
-  
-  // Send to API
+
+  // 👉 Show typing indicator
+  const typingBubble = showTypingIndicator();
+
+  const headers = {
+    "accept": "application/json",
+    "Content-Type": "application/json",
+    "x-api-key": token,
+  };
+
   fetch("https://api.chatsupplies.com/chat/message", {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
       message: text,
       chatbot_id: adminId,
-      session_id: "string" // or your actual session id
+      session_id: "string"
     })
   })
     .then(res => {
-      console.log(res)
       if (!res.ok) throw new Error("Request failed: " + res.status);
       return res.json();
     })
- .then(data => {
-  if (data.response) {
-    appendBotMessage(data.response);
-  } else {
-    appendBotMessage("Sorry, I didn't get a response.");
-  }
-})
-.catch(err => {
-  console.error("Fetch error:", err);
-  appendBotMessage("Sorry, there was an error. Please try again.");
-});
+    .then(data => {
+      // Remove typing bubble
+      typingBubble.remove();
+
+      if (data.response) {
+        appendBotMessage(data.response);
+      } else {
+        appendBotMessage("Sorry, I didn't get a response.");
+      }
+    })
+    .catch(err => {
+      typingBubble.remove();
+      console.error("Fetch error:", err);
+      appendBotMessage("Sorry, there was an error. Please try again.");
+    });
 }
+
 function appendBotMessage(text) {
   const botMsg = document.createElement('div');
   botMsg.className = 'botMsg';
+  botMsg.style.backgroundColor = bot_bubble_color || '#015F63';
   botMsg.textContent = text;
   botMsg.style.color = 'white';
   botMsg.style.padding = '12px 16px';
@@ -388,7 +422,7 @@ function appendBotMessage(text) {
   botMsg.style.margin = '10px 0';
   botMsg.style.fontSize = '14px';
   chatBody.appendChild(botMsg);
-  chatBody.scrollTop = chatBody.scrollHeight;
+  // chatBody.scrollTop = chatBody.scrollHeight;
 }
 function fetchChatHistory() {
     const xhr = new XMLHttpRequest();
@@ -418,41 +452,65 @@ inputBox.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') sendMessage();
 });
 
-
 function fetchChatbotConfig(token, adminId) {
   const url = `https://api.chatsupplies.com/chatbots/getChatbotConfig?api_key=${token}&chatbot_id=${adminId}`;
 
   fetch(url, {
-    method: 'POST',
-    headers: {
-      'accept': 'application/json'
-    },
-    body: '' // empty body as in the curl
+    method: "POST",
+    headers: { accept: "application/json" },
+    body: "",
   })
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-    return res.json();
-  })
-  .then(data => {
-    console.log("Chatbot config fetched successfully:", data);
-  
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Chatbot config fetched successfully:", data);
+      const config = data[0];
 
-    let colorScheme = JSON.parse(data[0].color_scheme);
-    document.getElementById("header").style.backgroundColor = colorScheme.primary || '#a5a5a5ff';
-    document.getElementById("sendBtn").style.backgroundColor = colorScheme.primary || '#a5a5a5ff';
-    document.querySelector(".botMsg").style.backgroundColor = data[0].bot_bubble_color || '#df0808ff';
-    document.getElementById("chatTitle").textContent = data[0].name || 'Chatbot';
-    userBubbleColor = data[0].user_bubble_color || '#15bfbfff'
-    // document.querySelector(".userMsgBubble").style.backgroundColor = ;
-    document.getElementById("chatBody").style.backgroundColor = data[0].window_background_color || '#000000ff';
-    // You can update the UI or use this data however you like
-  })
-  .catch(err => {
-    console.error("Failed to fetch chatbot config:", err);
-  });
+      // Parse color scheme safely
+      let colorScheme = {};
+      try {
+        colorScheme = JSON.parse(config.color_scheme);
+      } catch {
+        colorScheme = {};
+      }
+
+      // Safely apply styles if elements exist
+      const header = document.getElementById("header");
+      if (header) header.style.backgroundColor = colorScheme.primary || "#a5a5a5";
+
+       const logo = document.getElementById("logo");
+      if (logo) logo.style.src = config.logo_url || "https://chatsupplies.com/logo.png";
+      console.log(config.logo_url)
+
+      const sendBtn = document.getElementById("sendBtn");
+      if (sendBtn) sendBtn.style.backgroundColor = colorScheme.primary || "#a5a5a5";
+
+      const chatTitle = document.getElementById("chatTitle");
+      if (chatTitle) chatTitle.textContent = config.name || "Chatbot";
+
+      const chatBody = document.getElementById("chatBody");
+      if (chatBody) chatBody.style.backgroundColor = config.window_background_color || "#2023d3";
+const botBubbleMsg = document.getElementById("botBubbleMsg");
+      if (botBubbleMsg) botBubbleMsg.style.backgroundColor = config.bot_bubble_color || "#2023d3";
+
+      const userMsgBubble = document.getElementById("userMsgBubble");
+      if (userMsgBubble) userMsgBubble.style.backgroundColor = config.user_bubble_color || "#2023d3";
+      // Store bubble colors for later use in sendMessage / appendBotMessage
+      window.user_bubble_color = config.user_bubble_color || "#15bfbf";
+      window.bot_bubble_color = config.bot_bubble_color || "#29990a";
+
+      console.log("Colors loaded → User:", window.user_bubble_color, "Bot:", window.bot_bubble_color);
+    })
+    .catch((err) => {
+      console.error("Failed to fetch chatbot config:", err);
+    });
 }
-fetchChatbotConfig(token, adminId);
 
+document.addEventListener("DOMContentLoaded", () => {
+  fetchChatbotConfig(token, adminId);
+});
 
 
 // sendBtn.addEventListener('click', sendMessage);
