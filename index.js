@@ -668,9 +668,9 @@ function fetchChatbotConfig(token, adminId) {
       // Apply styles with transitions
       const header = document.getElementById("header");
       if (header) header.style.backgroundColor = colorScheme.primary || "#a5a5a5";
-
+const baseUrl = "https://api.chatsupplies.com";
       const logo = document.getElementById("logo");
-      if (logo) logo.src = config.logo_url || "https://chatsupplies.com/logo.png";
+      if (logo) logo.src = `${baseUrl}${config.logo_url}`;
 
       const sendBtn = document.getElementById("sendBtn");
       if (sendBtn) sendBtn.style.backgroundColor = colorScheme.primary || "#a5a5a5";
