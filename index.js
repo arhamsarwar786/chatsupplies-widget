@@ -82,6 +82,7 @@ chatPage.style.height = '385px';
 chatPage.style.opacity = '1';
 chatPage.style.transition = 'opacity 0.3s ease';
 
+
 // Email Page
 const emailPage = document.createElement('div');
 emailPage.style.display = 'none';
@@ -107,6 +108,7 @@ emailPage.innerHTML = `
 
 // WhatsApp Page
 const whatsappPage = document.createElement('div');
+whatsappPage.id = 'whatsappPage';
 whatsappPage.style.display = 'none';
 whatsappPage.style.flexDirection = 'column';
 whatsappPage.style.height = '385px';
@@ -134,6 +136,8 @@ header.style.padding = '12px';
 header.style.display = 'flex';
 header.style.height = '40px';
 header.style.flexDirection = 'column';
+header.style.borderTopLeftRadius = '12px';
+header.style.borderTopRightRadius = '12px';
 header.style.gap = '6px';
 header.style.transition = 'background-color 0.3s ease';
 
@@ -186,7 +190,7 @@ chatBody.style.overflowY = 'auto';
 chatBody.style.display = 'flex';
 chatBody.style.flexDirection = 'column';
 chatBody.style.transition = 'background-color 0.3s ease';
-
+chatBody.style.scrollBehavior = 'smooth';
 // Initial bot message
 const botBubbleMsg = document.createElement('div');
 botBubbleMsg.id = 'botBubbleMsg';
@@ -221,8 +225,10 @@ const inputWrapper = document.createElement('div');
 inputWrapper.style.display = 'flex';
 inputWrapper.style.flex = '1';
 inputWrapper.style.alignItems = 'center';
-inputWrapper.style.background = '#2C2C2E';
+inputWrapper.style.background = '#d8d8d8ff';
 inputWrapper.style.borderRadius = '20px';
+inputWrapper.style.caretColor = 'black';
+inputWrapper.style.color = "black";    
 inputWrapper.style.padding = '4px 8px';
 inputWrapper.style.transition = 'all 0.2s ease';
 
@@ -232,7 +238,8 @@ inputBox.placeholder = 'Type your Message';
 inputBox.style.flex = '1';
 inputBox.style.background = 'transparent';
 inputBox.style.border = 'none';
-inputBox.style.color = 'white';
+inputBox.style.height = '30px';
+// inputBox.style.color = 'white';
 inputBox.style.fontSize = '11px';
 inputBox.style.outline = 'none';
 inputBox.style.transition = 'all 0.2s ease';
@@ -264,13 +271,13 @@ micIcon.addEventListener('mouseleave', () => {
 });
 
 inputWrapper.appendChild(inputBox);
-inputWrapper.appendChild(micIcon);
+// inputWrapper.appendChild(micIcon);
 inputArea.appendChild(inputWrapper);
 
 // Send Button
 const sendBtn = document.createElement('button');
 sendBtn.id = 'sendBtn';
-sendBtn.innerHTML = '<img src="/send.png" alt="Send" style="width: 20px; height: 20px; transition: transform 0.2s ease;">';
+sendBtn.innerHTML = '<div style=" height: 20px; transition: transform 0.2s ease;">Send</div>';
 sendBtn.style.border = 'none';
 sendBtn.style.borderRadius = '12px';
 sendBtn.style.padding = '8px';
@@ -317,6 +324,7 @@ const tabs = [
 tabs.forEach(tab => {
   const tabEl = document.createElement('div');
   tabEl.style.display = 'flex';
+  // tabEl.style.background = '#6a6a6aff';
   tabEl.style.flexDirection = 'column';
   tabEl.style.alignItems = 'center';
   tabEl.style.justifyContent = 'center';
@@ -475,6 +483,16 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+
+function simpleMarkdownToHtml(text) {
+  return text
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
+    .replace(/\*(.*?)\*/gim, '<i>$1</i>')
+    .replace(/\n/g, '<br>');
+}
 // === FUNCTIONALITY === //
 function sendMessage() {
   const text = inputBox.value.trim();
@@ -535,21 +553,24 @@ function sendMessage() {
 
       if (data.response) {
         let botResponse = data.response;
-
+        
         try {
-          if (typeof botResponse === "string") {
-            botResponse = JSON.parse(botResponse);
-          }
-
+          botResponse = botResponse.replace(/\n/g, "");
+                    
+          let parsed = JSON.parse(botResponse);
+                  
+          botResponse = JSON.parse(botResponse).response
+          
           // Convert markdown to HTML
-          let html = marked.parse(botResponse.response || "");
-
+          let html = simpleMarkdownToHtml(botResponse || "");
+          
+          console.log(html, "---------------------");
           // Put HTML into a temp div
           const tempDiv = document.createElement("div");
           tempDiv.innerHTML = html;
 
           // Remove headings
-          tempDiv.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(el => el.remove());
+          // tempDiv.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(el => el.remove());
 
           // Extract plain text
           let plainText = tempDiv.textContent || "";
@@ -564,6 +585,8 @@ function sendMessage() {
 
           appendBotMessage(plainText);
         } catch (e) {
+          console.log(e);
+          
           appendBotMessage(data.response); // fallback
         }
       } else {
@@ -693,6 +716,13 @@ const baseUrl = "https://api.chatsupplies.com";
       const inputArea = document.getElementById("inputArea");
       if (inputArea) inputArea.style.backgroundColor = config.window_background_color || "#f1f1f1";
 
+
+      const whatsappPage = document.getElementById("whatsappPage");
+      whatsappPage.addEventListener("click", () => {
+  window.open(`https://wa.me/${config.client_phone}`, "_blank");
+});
+
+      
       const botBubbleMsg = document.getElementById("botBubbleMsg");
       if (botBubbleMsg) {
         botBubbleMsg.style.backgroundColor = config.bot_bubble_color || "#2023d3";
