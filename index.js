@@ -52,10 +52,11 @@ document.body.appendChild(toggleBtn);
 
 // === CONTAINER === //
 const container = document.createElement('div');
-container.style.width = '330px';
-container.style.height = '450px'; 
-container.style.borderRadius = '4px';
-container.style.border = '1px solid #ffffffff';
+container.id = 'header';
+container.style.width = '400px';
+container.style.height = '550px'; 
+container.style.borderRadius = '12px';
+// container.style.border = '1px solid #ffffffff';
 container.style.overflow = 'hidden';
 container.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
 container.style.display = 'flex';
@@ -131,19 +132,20 @@ whatsappPage.innerHTML = `
 // === HEADER === //
 const header = document.createElement('div');
 header.id = "header";
+// header.innerHTML = '<div style="display: flex; align-items: center; width: 100%; height: 100%; padding: 12px;"></div>';
 header.style.color = 'white';
-header.style.padding = '12px';
+// header.style.padding = '12px';
 header.style.display = 'flex';
-header.style.height = '40px';
+header.style.width = '100%';
+header.style.height = 'fit-content';
 header.style.flexDirection = 'column';
-header.style.borderTopLeftRadius = '12px';
-header.style.borderTopRightRadius = '12px';
 header.style.gap = '6px';
 header.style.transition = 'background-color 0.3s ease';
 
 const titleRow = document.createElement('div');
 titleRow.style.display = 'flex';
 titleRow.style.alignItems = 'center';
+titleRow.style.padding = '16px';
 
 const logo = document.createElement('img');
 logo.id = 'logo';
@@ -187,6 +189,8 @@ chatBody.style.flex = '1';
 chatBody.style.height = '320px';
 chatBody.style.padding = '16px';
 chatBody.style.overflowY = 'auto';
+chatBody.style.borderTop = '1px solid #e0e0e0';
+chatBody.style.borderRadius = '30px 30px 0 0';
 chatBody.style.display = 'flex';
 chatBody.style.flexDirection = 'column';
 chatBody.style.transition = 'background-color 0.3s ease';
@@ -213,88 +217,87 @@ chatPage.appendChild(chatBody);
 const inputArea = document.createElement('div');
 inputArea.id = 'inputArea';
 inputArea.style.display = 'flex';
-inputArea.style.height = '40px';
 inputArea.style.alignItems = 'center';
-inputArea.style.padding = '10px';
-// inputArea.style.borderTop = '1px solid #333';
-inputArea.style.background = '#1C1C1E';
-inputArea.style.gap = '8px';
-inputArea.style.transition = 'background-color 0.3s ease';
+inputArea.style.padding = '18px 16px 18px 16px';
+// inputArea.style.background = 'rgba(255,255,255,0.7)';
+inputArea.style.backdropFilter = 'blur(8px)';
+inputArea.style.border = 'none';
+inputArea.style.boxShadow = '0 2px 16px rgba(30,60,120,0.07)';
+// inputArea.style.borderRadius = '0 0 18px 18px';
+inputArea.style.gap = '10px';
+inputArea.style.position = 'relative';
+inputArea.style.zIndex = '2';
+inputArea.style.margin = '0 auto';
+inputArea.style.width = '100%';
+inputArea.style.boxSizing = 'border-box';
+inputArea.style.transition = 'background-color 0.3s, box-shadow 0.3s';
 
 const inputWrapper = document.createElement('div');
 inputWrapper.style.display = 'flex';
 inputWrapper.style.flex = '1';
 inputWrapper.style.alignItems = 'center';
-inputWrapper.style.background = '#d8d8d8ff';
-inputWrapper.style.borderRadius = '20px';
-inputWrapper.style.caretColor = 'black';
-inputWrapper.style.color = "black";    
-inputWrapper.style.padding = '4px 8px';
+// inputWrapper.style.background = 'rgba(245,247,250,0.95)';
+// inputWrapper.style.borderRadius = '24px';
+inputWrapper.style.boxShadow = '0 1px 4px rgba(30,60,120,0.04)';
+inputWrapper.style.padding = '8px 18px';
+inputWrapper.style.marginRight = '8px';
 inputWrapper.style.transition = 'all 0.2s ease';
+inputWrapper.style.borderBottom = '1.5px solid #000000ff';
 
 const inputBox = document.createElement('input');
 inputBox.type = 'text';
-inputBox.placeholder = 'Type your Message';
+inputBox.placeholder = 'Type your message...';
 inputBox.style.flex = '1';
 inputBox.style.background = 'transparent';
 inputBox.style.border = 'none';
-inputBox.style.height = '30px';
-// inputBox.style.color = 'white';
-inputBox.style.fontSize = '11px';
+inputBox.style.height = '28px';
+inputBox.style.fontSize = '16px';
 inputBox.style.outline = 'none';
+inputBox.style.color = '#1a1a1a';
+inputBox.style.fontWeight = '400';
+inputBox.style.letterSpacing = '0.01em';
 inputBox.style.transition = 'all 0.2s ease';
 
 // Focus effects for input
 inputBox.addEventListener('focus', () => {
-  inputWrapper.style.boxShadow = '0 0 0 2px rgba(1, 95, 99, 0.3)';
-  inputWrapper.style.transform = 'scale(1.02)';
+  // inputWrapper.style.boxShadow = '0 2px 8px rgba(30,60,120,0.10)';
+  // inputWrapper.style.border = '1.5px solid #1b4e9b';
 });
 
 inputBox.addEventListener('blur', () => {
-  inputWrapper.style.boxShadow = 'none';
-  inputWrapper.style.transform = 'scale(1)';
-});
-
-const micIcon = document.createElement('span');
-micIcon.textContent = '🎤';
-micIcon.style.cursor = 'pointer';
-micIcon.style.marginLeft = '8px';
-micIcon.style.fontSize = '18px';
-micIcon.style.transition = 'transform 0.2s ease';
-
-micIcon.addEventListener('mouseenter', () => {
-  micIcon.style.transform = 'scale(1.2)';
-});
-
-micIcon.addEventListener('mouseleave', () => {
-  micIcon.style.transform = 'scale(1)';
+  // inputWrapper.style.boxShadow = '0 1px 4px rgba(30,60,120,0.04)';
+  // inputWrapper.style.border = '1.5px solid #e3e8f0';
 });
 
 inputWrapper.appendChild(inputBox);
-// inputWrapper.appendChild(micIcon);
 inputArea.appendChild(inputWrapper);
 
-// Send Button
+// Modern Send Button (floating, circular, with icon)
 const sendBtn = document.createElement('button');
 sendBtn.id = 'sendBtn';
-sendBtn.innerHTML = '<div style=" height: 20px; transition: transform 0.2s ease;">Send</div>';
+sendBtn.innerHTML = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.5 13L17.5 13" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 8.5L17.5 13L13 17.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="paint0_linear" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#0a2e73"/><stop offset="1" stop-color="#1b4e9b"/></linearGradient></defs></svg>';
 sendBtn.style.border = 'none';
-sendBtn.style.borderRadius = '12px';
-sendBtn.style.padding = '8px';
+sendBtn.style.background = 'none';
+sendBtn.style.borderRadius = '50%';
+sendBtn.style.width = '44px';
+sendBtn.style.height = '44px';
+sendBtn.style.display = 'flex';
+sendBtn.style.alignItems = 'center';
+sendBtn.style.justifyContent = 'center';
+sendBtn.style.position = 'relative';
+sendBtn.style.right = '0';
+sendBtn.style.bottom = '0';
+sendBtn.style.boxShadow = '0 2px 8px rgba(30,60,120,0.10)';
 sendBtn.style.cursor = 'pointer';
-sendBtn.style.color = 'white';
-sendBtn.style.fontSize = '14px';
-sendBtn.style.transition = 'all 0.2s ease';
+sendBtn.style.transition = 'transform 0.15s, box-shadow 0.15s';
 
-// Hover effect for send button
 sendBtn.addEventListener('mouseenter', () => {
-  sendBtn.style.transform = 'scale(1.1)';
-  sendBtn.querySelector('img').style.transform = 'translateX(2px)';
+  sendBtn.style.transform = 'scale(1.08)';
+  sendBtn.style.boxShadow = '0 4px 16px rgba(30,60,120,0.18)';
 });
-
 sendBtn.addEventListener('mouseleave', () => {
   sendBtn.style.transform = 'scale(1)';
-  sendBtn.querySelector('img').style.transform = 'translateX(0)';
+  sendBtn.style.boxShadow = '0 2px 8px rgba(30,60,120,0.10)';
 });
 
 inputArea.appendChild(sendBtn);
@@ -315,118 +318,121 @@ footer.style.background = '#111';
 footer.style.borderTop = '1px solid #333';
 footer.style.transition = 'background-color 0.3s ease';
 
-const tabs = [
-  { icon: '🤖', label: 'Chatbot', page: 'chat' },
-  { icon: '📨', label: 'Email', page: 'email' },
-  { icon: '📱', label: 'WhatsApp', page: 'whatsapp' }
-];
+// const tabs = [
+//   { icon: '🤖', label: 'Chatbot', page: 'chat' },
+//   { icon: '📨', label: 'Email', page: 'email' },
+//   { icon: '📱', label: 'WhatsApp', page: 'whatsapp' }
+// ];
 
-tabs.forEach(tab => {
-  const tabEl = document.createElement('div');
-  tabEl.style.display = 'flex';
-  // tabEl.style.background = '#6a6a6aff';
-  tabEl.style.flexDirection = 'column';
-  tabEl.style.alignItems = 'center';
-  tabEl.style.justifyContent = 'center';
-  tabEl.style.color = '#bbb';
-  tabEl.style.fontSize = '12px';
-  tabEl.style.cursor = 'pointer';
-  tabEl.style.padding = '12px 12px';
-  tabEl.style.transition = 'all 0.3s ease';
-  tabEl.style.borderTop = '2px solid transparent';
-  tabEl.style.flex = '1';
-  tabEl.style.fontFamily = 'sans-serif';
+// tabs.forEach(tab => {
+//   const tabEl = document.createElement('div');
+//   tabEl.style.display = 'flex';
+//   // tabEl.style.background = '#6a6a6aff';
+//   tabEl.style.flexDirection = 'column';
+//   tabEl.style.alignItems = 'center';
+//   tabEl.style.justifyContent = 'center';
+//   tabEl.style.color = '#bbb';
+//   tabEl.style.fontSize = '12px';
+//   tabEl.style.cursor = 'pointer';
+//   tabEl.style.padding = '12px 12px';
+//   tabEl.style.transition = 'all 0.3s ease';
+//   tabEl.style.borderTop = '2px solid transparent';
+//   tabEl.style.flex = '1';
+//   tabEl.style.fontFamily = 'sans-serif';
 
-  const icon = document.createElement('span');
-  icon.textContent = tab.icon;
-  icon.style.fontSize = '20px';
-  icon.style.marginBottom = '4px';
-  icon.style.transition = 'transform 0.2s ease';
+//   const icon = document.createElement('span');
+//   icon.textContent = tab.icon;
+//   icon.style.fontSize = '20px';
+//   icon.style.marginBottom = '4px';
+//   icon.style.transition = 'transform 0.2s ease';
 
-  const label = document.createElement('span');
-  label.textContent = tab.label;
-  label.style.fontWeight = '300';
-  label.style.transition = 'color 0.2s ease';
+//   const label = document.createElement('span');
+//   label.textContent = tab.label;
+//   label.style.fontWeight = '300';
+//   label.style.transition = 'color 0.2s ease';
 
-  tabEl.appendChild(icon);
-  tabEl.appendChild(label);
+//   tabEl.appendChild(icon);
+//   tabEl.appendChild(label);
 
-  // Hover effects for tabs
-  tabEl.addEventListener('mouseenter', () => {
-    icon.style.transform = 'scale(1.2)';
-    label.style.color = '#01B4B8';
-  });
+//   // Hover effects for tabs
+//   tabEl.addEventListener('mouseenter', () => {
+//     icon.style.transform = 'scale(1.2)';
+//     label.style.color = '#01B4B8';
+//   });
 
-  tabEl.addEventListener('mouseleave', () => {
-    if (!tabEl.classList.contains('active')) {
-      icon.style.transform = 'scale(1)';
-      label.style.color = '#bbb';
-    }
-  });
+//   tabEl.addEventListener('mouseleave', () => {
+//     if (!tabEl.classList.contains('active')) {
+//       icon.style.transform = 'scale(1)';
+//       label.style.color = '#bbb';
+//     }
+//   });
 
-  tabEl.addEventListener('click', () => {
-    // Hide all pages with fade out
-    [chatPage, emailPage, whatsappPage].forEach(page => {
-      page.style.opacity = '0';
-      setTimeout(() => {
-        page.style.display = 'none';
-      }, 150);
-    });
+//   tabEl.addEventListener('click', () => {
+//     // Hide all pages with fade out
+//     [chatPage, emailPage, whatsappPage].forEach(page => {
+//       page.style.opacity = '0';
+//       setTimeout(() => {
+//         page.style.display = 'none';
+//       }, 150);
+//     });
 
-    // Show selected page with fade in
-    setTimeout(() => {
-      let selectedPage;
-      if (tab.page === 'chat') selectedPage = chatPage;
-      if (tab.page === 'email') selectedPage = emailPage;
-      if (tab.page === 'whatsapp') selectedPage = whatsappPage;
+//     // Show selected page with fade in
+//     setTimeout(() => {
+//       let selectedPage;
+//       if (tab.page === 'chat') selectedPage = chatPage;
+//       if (tab.page === 'email') selectedPage = emailPage;
+//       if (tab.page === 'whatsapp') selectedPage = whatsappPage;
       
-      selectedPage.style.display = 'flex';
-      setTimeout(() => {
-        selectedPage.style.opacity = '1';
-      }, 10);
-    }, 150);
+//       selectedPage.style.display = 'flex';
+//       setTimeout(() => {
+//         selectedPage.style.opacity = '1';
+//       }, 10);
+//     }, 150);
 
-    // Update active tab styling
-    document.querySelectorAll('.footer-tab').forEach(t => {
-      t.style.color = '#bbb';
-      t.style.borderTop = '2px solid transparent';
-      t.style.fontWeight = 'normal';
-      t.style.backgroundColor = 'transparent';
-      t.classList.remove('active');
-    });
+//     // Update active tab styling
+//     document.querySelectorAll('.footer-tab').forEach(t => {
+//       t.style.color = '#bbb';
+//       t.style.borderTop = '2px solid transparent';
+//       t.style.fontWeight = 'normal';
+//       t.style.backgroundColor = 'transparent';
+//       t.classList.remove('active');
+//     });
 
-    tabEl.style.color = '#01B4B8';
-    tabEl.style.fontWeight = 'bold';
-    tabEl.style.borderTop = '2px solid #01B4B8';
-    tabEl.style.backgroundColor = '#1a1a1a';
-    tabEl.classList.add('active');
-  });
+//     tabEl.style.color = '#01B4B8';
+//     tabEl.style.fontWeight = 'bold';
+//     tabEl.style.borderTop = '2px solid #01B4B8';
+//     tabEl.style.backgroundColor = '#1a1a1a';
+//     tabEl.classList.add('active');
+//   });
 
-  tabEl.classList.add('footer-tab');
-  footer.appendChild(tabEl);
-});
+//   tabEl.classList.add('footer-tab');
+//   footer.appendChild(tabEl);
+// });
 
 // Set first tab as active by default
-if (footer.firstChild) {
-  footer.firstChild.style.color = '#01B4B8';
-  footer.firstChild.style.fontWeight = 'bold';
-  footer.firstChild.style.borderTop = '2px solid #01B4B8';
-  footer.firstChild.style.backgroundColor = '#1a1a1a';
-  footer.firstChild.classList.add('active');
-}
+// if (footer.firstChild) {
+//   footer.firstChild.style.color = '#01B4B8';
+//   footer.firstChild.style.fontWeight = 'bold';
+//   footer.firstChild.style.borderTop = '2px solid #01B4B8';
+//   footer.firstChild.style.backgroundColor = '#1a1a1a';
+//   footer.firstChild.classList.add('active');
+// }
 
-container.appendChild(footer);
+// container.appendChild(footer);
 
 // === POWERED BY === //
 const powered = document.createElement('div');
 powered.id = 'powered';
 powered.innerHTML = 'Powered by : <strong>Chat Supplies</strong>';
 powered.style.fontSize = '10px';
-powered.style.height = '10px';
+powered.style.height = '20px';
+powered.style.display = 'flex';
+powered.style.justifyContent = 'center';
+powered.style.alignItems = 'center';
 powered.style.color = '#015F63';
 powered.style.background = '#ffffffff';
 powered.style.textAlign = 'center';
-powered.style.padding = '4px 0';
+powered.style.padding = '4px';
 powered.style.transition = 'color 0.3s ease';
 container.appendChild(powered);
 
