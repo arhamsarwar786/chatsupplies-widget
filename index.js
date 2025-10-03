@@ -88,8 +88,8 @@ chatPage.style.transition = 'opacity 0.3s ease';
 const emailPage = document.createElement('div');
 emailPage.style.display = 'none';
 emailPage.style.flexDirection = 'column';
-emailPage.style.height = '385px';
-emailPage.style.width = '330px';
+emailPage.style.height = '100%';
+emailPage.style.width = '100%';
 emailPage.style.padding = '16px';
 emailPage.style.color = 'white';
 emailPage.style.opacity = '0';
@@ -112,7 +112,7 @@ const whatsappPage = document.createElement('div');
 whatsappPage.id = 'whatsappPage';
 whatsappPage.style.display = 'none';
 whatsappPage.style.flexDirection = 'column';
-whatsappPage.style.height = '385px';
+whatsappPage.style.height = '510px';
 whatsappPage.style.padding = '16px';
 whatsappPage.style.color = 'white';
 whatsappPage.style.textAlign = 'center';
@@ -218,11 +218,11 @@ const inputArea = document.createElement('div');
 inputArea.id = 'inputArea';
 inputArea.style.display = 'flex';
 inputArea.style.alignItems = 'center';
-inputArea.style.padding = '18px 16px 18px 16px';
+inputArea.style.padding = '18px 16px 0 16px';
 // inputArea.style.background = 'rgba(255,255,255,0.7)';
 inputArea.style.backdropFilter = 'blur(8px)';
 inputArea.style.border = 'none';
-inputArea.style.boxShadow = '0 2px 16px rgba(30,60,120,0.07)';
+// inputArea.style.boxShadow = '0 2px 16px rgba(30,60,120,0.07)';
 // inputArea.style.borderRadius = '0 0 18px 18px';
 inputArea.style.gap = '10px';
 inputArea.style.position = 'relative';
@@ -230,7 +230,7 @@ inputArea.style.zIndex = '2';
 inputArea.style.margin = '0 auto';
 inputArea.style.width = '100%';
 inputArea.style.boxSizing = 'border-box';
-inputArea.style.transition = 'background-color 0.3s, box-shadow 0.3s';
+// inputArea.style.transition = 'background-color 0.3s, box-shadow 0.3s';
 
 const inputWrapper = document.createElement('div');
 inputWrapper.style.display = 'flex';
@@ -242,21 +242,21 @@ inputWrapper.style.boxShadow = '0 1px 4px rgba(30,60,120,0.04)';
 inputWrapper.style.padding = '8px 18px';
 inputWrapper.style.marginRight = '8px';
 inputWrapper.style.transition = 'all 0.2s ease';
-inputWrapper.style.borderBottom = '1.5px solid #000000ff';
+inputWrapper.style.borderTop = '1px solid #c5c4c4ff';
 
 const inputBox = document.createElement('input');
 inputBox.type = 'text';
-inputBox.placeholder = 'Type your message...';
+inputBox.placeholder = 'Enter your message...';
 inputBox.style.flex = '1';
 inputBox.style.background = 'transparent';
 inputBox.style.border = 'none';
 inputBox.style.height = '28px';
-inputBox.style.fontSize = '16px';
+inputBox.style.fontSize = '14px';
 inputBox.style.outline = 'none';
-inputBox.style.color = '#1a1a1a';
-inputBox.style.fontWeight = '400';
+inputBox.style.color = '#000000ff';
+inputBox.style.fontWeight = '300';
 inputBox.style.letterSpacing = '0.01em';
-inputBox.style.transition = 'all 0.2s ease';
+// inputBox.style.transition = 'all 0.2s ease';
 
 // Focus effects for input
 inputBox.addEventListener('focus', () => {
@@ -275,9 +275,13 @@ inputArea.appendChild(inputWrapper);
 // Modern Send Button (floating, circular, with icon)
 const sendBtn = document.createElement('button');
 sendBtn.id = 'sendBtn';
-sendBtn.innerHTML = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.5 13L17.5 13" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 8.5L17.5 13L13 17.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="paint0_linear" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#0a2e73"/><stop offset="1" stop-color="#1b4e9b"/></linearGradient></defs></svg>';
+sendBtn.innerHTML = `
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2.01 21L23 12L2.01 3L2 10l15 2-15 2 .01 7z" />
+  </svg>
+`;
 sendBtn.style.border = 'none';
-sendBtn.style.background = 'none';
+// sendBtn.style.background = 'linear-gradient(135deg, #0a2e73, #1b4e9b)';
 sendBtn.style.borderRadius = '50%';
 sendBtn.style.width = '44px';
 sendBtn.style.height = '44px';
@@ -290,6 +294,16 @@ sendBtn.style.bottom = '0';
 sendBtn.style.boxShadow = '0 2px 8px rgba(30,60,120,0.10)';
 sendBtn.style.cursor = 'pointer';
 sendBtn.style.transition = 'transform 0.15s, box-shadow 0.15s';
+
+sendBtn.addEventListener('mouseenter', () => {
+  sendBtn.style.transform = 'scale(1.08)';
+  sendBtn.style.boxShadow = '0 4px 16px rgba(30,60,120,0.18)';
+});
+sendBtn.addEventListener('mouseleave', () => {
+  sendBtn.style.transform = 'scale(1)';
+  sendBtn.style.boxShadow = '0 2px 8px rgba(30,60,120,0.10)';
+});
+
 
 sendBtn.addEventListener('mouseenter', () => {
   sendBtn.style.transform = 'scale(1.08)';
@@ -409,32 +423,149 @@ footer.style.transition = 'background-color 0.3s ease';
 //   footer.appendChild(tabEl);
 // });
 
-// Set first tab as active by default
-// if (footer.firstChild) {
-//   footer.firstChild.style.color = '#01B4B8';
-//   footer.firstChild.style.fontWeight = 'bold';
-//   footer.firstChild.style.borderTop = '2px solid #01B4B8';
-//   footer.firstChild.style.backgroundColor = '#1a1a1a';
-//   footer.firstChild.classList.add('active');
-// }
 
-// container.appendChild(footer);
 
-// === POWERED BY === //
+// === POWERED BY CONTAINER === //
 const powered = document.createElement('div');
 powered.id = 'powered';
-powered.innerHTML = 'Powered by : <strong>Chat Supplies</strong>';
 powered.style.fontSize = '10px';
-powered.style.height = '20px';
+powered.style.height = '28px';
 powered.style.display = 'flex';
-powered.style.justifyContent = 'center';
+powered.style.justifyContent = 'space-between'; // space between icons & text
 powered.style.alignItems = 'center';
-powered.style.color = '#015F63';
-powered.style.background = '#ffffffff';
 powered.style.textAlign = 'center';
-powered.style.padding = '4px';
+powered.style.padding = '20px';
 powered.style.transition = 'color 0.3s ease';
+powered.style.width = '100%';
+powered.style.boxSizing = 'border-box';
+
+// === LEFT ICONS === //
+// === TABS CONFIG (with icons instead of emojis) === //
+const tabs = [
+  { icon: 'chat.png', page: 'chat',  },
+  { icon: 'whatsapp.png', page: 'whatsapp' },
+  { icon: 'gmail.png', page: 'email' }
+];
+
+// === ICON BAR === //
+const icons = document.createElement('div');
+icons.style.display = 'flex';
+// icons.style.gap = '16px';
+icons.style.alignItems = 'center';
+
+// === RENDER TABS === //
+tabs.forEach(tab => {
+  const tabEl = document.createElement('div');
+   tabEl.id = 'activeTab';
+  tabEl.style.display = 'flex';
+  tabEl.style.flexDirection = 'column';
+  tabEl.style.alignItems = 'center';
+  tabEl.style.justifyContent = 'center';
+  tabEl.style.color = '#bbb';
+  tabEl.style.fontSize = '12px';
+  tabEl.style.cursor = 'pointer';
+  tabEl.style.padding = '6px 8px';
+  tabEl.style.transition = 'all 0.3s ease';
+  tabEl.style.borderTop = '2px solid transparent';
+  tabEl.style.fontFamily = 'sans-serif';
+  tabEl.style.flex = '0'; // don’t stretch across
+
+  // Icon
+  const iconImg = document.createElement('img');
+  iconImg.src = tab.icon;
+  iconImg.style.width = '18px';
+  iconImg.style.height = '18px';
+  iconImg.style.marginBottom = '3px';
+  iconImg.style.transition = 'transform 0.2s ease, filter 0.2s ease';
+
+  tabEl.appendChild(iconImg);
+
+  // Hover effects
+  tabEl.addEventListener('mouseenter', () => {
+    iconImg.style.transform = 'scale(1.2)';
+    iconImg.style.filter = 'brightness(1.3)';
+    label.style.color = '#01B4B8';
+  });
+
+  tabEl.addEventListener('mouseleave', () => {
+     tabEl.id = 'activeTab';
+    if (!tabEl.classList.contains('active')) {
+      iconImg.style.transform = 'scale(1)';
+      iconImg.style.filter = 'brightness(1)';
+      label.style.color = '#bbb';
+    }
+  });
+
+  // Click → change tab
+  tabEl.addEventListener('click', () => {
+    // Hide all pages
+    [chatPage, emailPage, whatsappPage].forEach(page => {
+      page.style.opacity = '0';
+      setTimeout(() => {
+        page.style.display = 'none';
+      }, 150);
+    });
+
+    // Show selected page
+    setTimeout(() => {
+      let selectedPage;
+      if (tab.page === 'chat') selectedPage = chatPage;
+      if (tab.page === 'email') selectedPage = emailPage;
+      if (tab.page === 'whatsapp') selectedPage = whatsappPage;
+
+      selectedPage.style.display = 'flex';
+      setTimeout(() => {
+        selectedPage.style.opacity = '1';
+      }, 10);
+    }, 150);
+
+    // Reset all tabs
+    document.querySelectorAll('.footer-tab').forEach(t => {
+      t.style.color = '#bbb';
+      t.style.borderTop = '2px solid transparent';
+      t.style.fontWeight = 'normal';
+      t.style.backgroundColor = 'transparent';
+      t.querySelector('span').style.color = '#bbb';
+      t.querySelector('img').style.filter = 'brightness(1)';
+      t.classList.remove('active');
+    });
+
+    // Active tab styles
+    
+    tabEl.style.color = '#01B4B8';
+    tabEl.style.fontWeight = 'bold';
+    // tabEl.style.borderTop = '2px solid #01B4B8';
+    // tabEl.style.backgroundColor = '#1a1a1a';
+    label.style.color = '#01B4B8';
+    iconImg.style.filter = 'brightness(1.3)';
+    tabEl.classList.add('active');
+  });
+
+  tabEl.classList.add('footer-tab');
+  icons.appendChild(tabEl);
+});
+
+// Append icons bar to footer
+footer.appendChild(icons);
+
+
+// === RIGHT POWERED TEXT === //
+const poweredText = document.createElement('div');
+poweredText.innerHTML = `
+  <strong style="font-weight: 800; font-size: 9px;">
+    <span style="font-weight: 400; color: #898585ff;">POWERED BY </span>
+    <img src="face.svg" alt="logo" style="height:14px;width:14px;vertical-align:middle;margin-right:4px;">
+    CHAT SUPPLIES
+  </strong>
+`;
+
+// Add icons (left) + text (right) into powered bar
+powered.appendChild(icons);
+powered.appendChild(poweredText);
+
+// Append to container
 container.appendChild(powered);
+
 
 function showTypingIndicator() {
   const typingBubble = document.createElement('div');
@@ -704,8 +835,15 @@ const baseUrl = "https://api.chatsupplies.com";
       const sendBtn = document.getElementById("sendBtn");
       if (sendBtn) sendBtn.style.backgroundColor = colorScheme.primary || "#a5a5a5";
 
+      const activeTab = document.getElementById("activeTab");
+      if (activeTab) {
+        activeTab.style.borderTop = `2px solid ${colorScheme.primary || "#a5a5a5"}`;
+      }
+
        const powered = document.getElementById("powered");
-      if (powered) powered.style.color = colorScheme.primary || "#a5a5a5";
+      if (powered) 
+        powered.style.color = colorScheme.primary || "#a5a5a5";
+      powered.style.backgroundColor = config.window_background_color || "#ffffffff";
 
  const toggleBtn = document.getElementById("toggleBtn");
       if (toggleBtn) toggleBtn.style.backgroundColor = colorScheme.primary || "#a5a5a5";
